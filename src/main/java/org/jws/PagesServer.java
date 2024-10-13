@@ -1,3 +1,4 @@
+/* (C)2024 */
 package org.jws;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -48,7 +49,7 @@ public class PagesServer {
         log.info("Pages server has started");
     }
 
-    private void handleGetPage(final HttpExchange httpExchange) throws IOException {
+    private void handleGetPage(final HttpExchange httpExchange) {
         try {
             setRequestIdInThreadContext();
             log.info("Starting GetPage handler.");
@@ -79,7 +80,7 @@ public class PagesServer {
         }
     }
 
-    private void handleWritePage(final HttpExchange httpExchange) throws IOException {
+    private void handleWritePage(final HttpExchange httpExchange) {
         try {
             setRequestIdInThreadContext();
             log.info("Starting WritePage activity.");
@@ -108,12 +109,12 @@ public class PagesServer {
         }
     }
 
-    private void sendError(final HttpExchange httpExchange, final int statusCode, final String errorMessage) throws IOException {
+    private void sendError(final HttpExchange httpExchange, final int statusCode, final String errorMessage) {
         final Error error = ImmutableError.builder().error(errorMessage).build();
         sendResponse(httpExchange, statusCode, error);
     }
 
-    private void sendResponse(final HttpExchange httpExchange, final int statusCode, final ReturnableModel model) throws IOException {
+    private void sendResponse(final HttpExchange httpExchange, final int statusCode, final ReturnableModel model) {
         try {
             final byte[] responseBytes = objectMapper.writeValueAsBytes(model);
             httpExchange.sendResponseHeaders(statusCode, responseBytes.length);
