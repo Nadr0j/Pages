@@ -20,14 +20,14 @@ public class PageModules {
 
     @Provides
     @Singleton
-    public PageWriter providePageWriter(final PagePathResolver pagePathResolver) {
-        return new PageWriter(pagePathResolver);
+    public PageWriter providePageWriter(final PagePathResolver pagePathResolver, final ObjectMapper objectMapper) {
+        return new PageWriter(pagePathResolver, objectMapper);
     }
 
     @Provides
     @Singleton
-    public PageReader providerPageReader(final PagePathResolver pagePathResolver) {
-        return new PageReader(pagePathResolver);
+    public PageReader providerPageReader(final PagePathResolver pagePathResolver, final ObjectMapper objectMapper) {
+        return new PageReader(pagePathResolver, objectMapper);
     }
 
     @Provides

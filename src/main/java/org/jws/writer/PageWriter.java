@@ -12,10 +12,12 @@ import java.nio.file.Path;
 
 public class PageWriter {
     private final PagePathResolver pagePathResolver;
-    public PageWriter(final PagePathResolver pagePathResolver) {
+    private final ObjectMapper objectMapper;
+    public PageWriter(final PagePathResolver pagePathResolver, final ObjectMapper objectMapper) {
         this.pagePathResolver = pagePathResolver;
+        this.objectMapper = objectMapper;
     }
-    public WritePageResponse write(final WritePageRequest writePageRequest, final ObjectMapper objectMapper) {
+    public WritePageResponse write(final WritePageRequest writePageRequest) {
         final Path pathToWriteTo = pagePathResolver.writeRequestToFilePath(writePageRequest);
         try {
             // Ensure directory to write page to exist
