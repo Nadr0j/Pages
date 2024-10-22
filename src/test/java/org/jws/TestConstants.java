@@ -1,10 +1,7 @@
 /* (C)2024 */
 package org.jws;
 
-import org.jws.model.GetPageRequest;
-import org.jws.model.ImmutableGetPageRequest;
-import org.jws.model.ImmutableWritePageRequest;
-import org.jws.model.WritePageRequest;
+import org.jws.model.*;
 
 import java.nio.file.Path;
 
@@ -15,10 +12,20 @@ public class TestConstants {
     public static final String NAME = "NAME";
     public static final String CONTENT = "CONTENT";
 
+    public static final Page PAGE = ImmutablePage.builder()
+            .user(USER)
+            .namespace(NAMESPACE)
+            .name(NAME)
+            .content(CONTENT)
+            .build();
     public static final GetPageRequest GET_PAGE_REQUEST = ImmutableGetPageRequest.builder()
             .user(USER)
             .namespace(NAMESPACE)
             .name(NAME)
+            .build();
+
+    public static final GetPageResponse GET_PAGE_RESPONSE = ImmutableGetPageResponse.builder()
+            .page(PAGE)
             .build();
 
     public static final WritePageRequest WRITE_PAGE_REQUEST = ImmutableWritePageRequest.builder()

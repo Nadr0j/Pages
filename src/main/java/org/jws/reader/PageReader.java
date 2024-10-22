@@ -4,7 +4,6 @@ package org.jws.reader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
 import org.jws.PagePathResolver;
-import org.jws.PagesServer;
 import org.jws.exception.ValidationException;
 import org.jws.model.*;
 
@@ -19,14 +18,14 @@ import static org.jws.exception.Messages.PAGE_DOES_NOT_EXIST;
 @Log4j2
 public class PageReader {
     private final PagePathResolver pagePathResolver;
-    public PageReader(final PagePathResolver pagePathResolver) {
+    private final ObjectMapper objectMapper;
+
+    public PageReader(final PagePathResolver pagePathResolver, final ObjectMapper objectMapper) {
         this.pagePathResolver = pagePathResolver;
+        this.objectMapper = objectMapper;
     }
 
-    public GetPageResponse read(
-            final GetPageRequest getPageRequest,
-            final ObjectMapper objectMapper
-    ) {
+    public GetPageResponse read(final GetPageRequest getPageRequest) {
         final Path pathToReadFileFrom = pagePathResolver.getRequestToFilePath(getPageRequest);
         try {
             final String pageContents = Files.readString(pathToReadFileFrom);

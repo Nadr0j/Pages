@@ -12,18 +12,16 @@ import javax.inject.Inject;
 @Log4j2
 public class WritePageActivity {
     private final PageWriter pageWriter;
-    private final ObjectMapper objectMapper;
 
     @Inject
-    public WritePageActivity(final PageWriter pageWriter, final ObjectMapper objectMapper) {
+    public WritePageActivity(final PageWriter pageWriter) {
         this.pageWriter = pageWriter;
-        this.objectMapper = objectMapper;
     }
 
     public WritePageResponse write(final WritePageRequest request) {
         log.info("Start WritePageActivity");
         try {
-            return pageWriter.write(request, objectMapper);
+            return pageWriter.write(request);
         } finally {
             log.info("End WritePageActivity");
         }
