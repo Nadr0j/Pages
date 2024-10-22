@@ -55,3 +55,11 @@ spotless {
 		licenseHeader '/* (C)$YEAR */'
 	}
 }
+
+test {
+	testLogging {
+		events "passed", "failed", "skipped"
+		exceptionFormat "full"
+		showStandardStreams = true
+	}
+}
