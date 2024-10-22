@@ -1,3 +1,4 @@
+/* (C)2024 */
 package org.jws.reader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;

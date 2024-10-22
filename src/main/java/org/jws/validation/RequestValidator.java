@@ -1,3 +1,4 @@
+/* (C)2024 */
 package org.jws.validation;
 
 import lombok.extern.log4j.Log4j2;
