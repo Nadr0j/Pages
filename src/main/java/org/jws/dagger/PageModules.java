@@ -3,6 +3,7 @@ package org.jws.dagger;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dagger.Module;
 import dagger.Provides;
+import org.jws.PagePathResolver;
 import org.jws.reader.PageReader;
 import org.jws.writer.PageWriter;
 
@@ -18,13 +19,19 @@ public class PageModules {
 
     @Provides
     @Singleton
-    public PageWriter providePageWriter() {
-        return new PageWriter();
+    public PageWriter providePageWriter(final PagePathResolver pagePathResolver) {
+        return new PageWriter(pagePathResolver);
     }
 
     @Provides
     @Singleton
-    public PageReader providerPageReader() {
-        return new PageReader();
+    public PageReader providerPageReader(final PagePathResolver pagePathResolver) {
+        return new PageReader(pagePathResolver);
+    }
+
+    @Provides
+    @Singleton
+    public PagePathResolver providePagePathResolver() {
+        return new PagePathResolver();
     }
 }
