@@ -1,3 +1,4 @@
+/* (C)2024 */
 package org.jws.exception;
 
 public class ValidationException extends RuntimeException {

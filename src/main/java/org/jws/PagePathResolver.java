@@ -1,3 +1,4 @@
+/* (C)2024 */
 package org.jws;
 
 import org.jws.model.GetPageRequest;

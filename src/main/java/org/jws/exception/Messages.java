@@ -1,3 +1,4 @@
+/* (C)2024 */
 package org.jws.exception;
 
 public final class Messages {
