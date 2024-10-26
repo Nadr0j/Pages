@@ -21,8 +21,7 @@ import java.net.InetSocketAddress;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 
-import static org.jws.exception.Messages.FIELD_MUST_NOT_BE_BLANK;
-import static org.jws.exception.Messages.PAGE_DOES_NOT_EXIST;
+import static org.jws.exception.Messages.*;
 import static org.jws.validation.RequestValidator.validateGetPageRequest;
 import static org.jws.validation.RequestValidator.validateWritePageRequest;
 
@@ -57,8 +56,9 @@ public class PagesServer {
                 final InputStream inputStream = httpExchange.getRequestBody();
                 final GetPageRequest request = objectMapper.readValue(inputStream, GetPageRequest.class);
                 validateGetPageRequest(request);
+                log.info("Received GetPage request with request object [{}]", request);
                 final GetPageResponse response = getPageActivity.get(request);
-                sendResponse(httpExchange, HttpURLConnection.HTTP_ACCEPTED, response);
+                sendResponse(httpExchange, HttpURLConnection.HTTP_OK, response);
                 log.info("Finished GetPage handler with success.");
             } else {
                 log.info("GetPage request sent but is not POST. Returning 404.");
@@ -87,9 +87,10 @@ public class PagesServer {
             if ("POST".equals(httpExchange.getRequestMethod())) {
                 final InputStream inputStream = httpExchange.getRequestBody();
                 final WritePageRequest request = objectMapper.readValue(inputStream, WritePageRequest.class);
+                log.info("Received WritePage request with request object [{}]", request);
                 validateWritePageRequest(request);
                 final WritePageResponse response = writePageActivity.write(request);
-                sendResponse(httpExchange, HttpURLConnection.HTTP_ACCEPTED, response);
+                sendResponse(httpExchange, HttpURLConnection.HTTP_OK, response);
                 log.info("Finished WritePage activity with success.");
             } else {
                 log.info("WritePage request sent but is not POST. Returning 404.");
@@ -99,6 +100,9 @@ public class PagesServer {
             log.info("Encountered validation exception in WritePage handler [{}]", e.toString());
             if (e.getMessage().contains(FIELD_MUST_NOT_BE_BLANK)) {
                 sendError(httpExchange, HttpURLConnection.HTTP_BAD_REQUEST, e.getMessage());
+            }
+            if (e.getMessage().contains(OVERWRITE_EXISTING_EXCEPTION)) {
+                sendError(httpExchange, HttpURLConnection.HTTP_CONFLICT, e.getMessage());
             }
         } catch (final Exception e) {
             log.error("Failed to write page with exception {}", e.toString());
