@@ -40,7 +40,7 @@ public class PagesServer {
 
     public void start() throws IOException {
         log.info("Starting Pages server");
-        final HttpServer server = HttpServer.create(new InetSocketAddress(8080), 2);
+        final HttpServer server = HttpServer.create(new InetSocketAddress(10_000), 2);
         server.createContext("/pages/writePage", this::handleWritePage);
         server.createContext("/pages/getPage", this::handleGetPage);
         server.setExecutor(Executors.newFixedThreadPool(10));
