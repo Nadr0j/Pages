@@ -6,4 +6,6 @@ public final class Messages {
 
     public static String PAGE_DOES_NOT_EXIST = "The requested page does not exist.";
     public static String FIELD_MUST_NOT_BE_BLANK = "Field must not be blank.";
+    public static String OVERWRITE_EXISTING_EXCEPTION = "Page already exists with provided metadata but " +
+            "overwrite existing is set to false";
 }

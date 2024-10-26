@@ -10,5 +10,10 @@ public abstract class WritePageRequest {
     public abstract String user();
     public abstract String namespace();
     public abstract String name();
+    @Value.Redacted
     public abstract String content();
+    @Value.Default
+    public boolean overwriteExisting() {
+        return false;
+    }
 }
