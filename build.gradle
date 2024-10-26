@@ -6,6 +6,14 @@ plugins {
 group 'org.jws'
 version '1.0-SNAPSHOT'
 
+jar {
+	manifest {
+		attributes(
+				'Main-Class': 'org.jws.Main'
+		)
+	}
+}
+
 repositories {
 	mavenCentral()
 }
