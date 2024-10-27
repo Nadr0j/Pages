@@ -8,10 +8,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class PagePathResolver {
-    private static final String PATH_PREFIX = "Pages";
+    private static final String ZFS_MOUNT = "/mnt/nas_share/Pages";
     public Path getRequestToFilePath(final GetPageRequest request) {
         return Paths.get(
-                PATH_PREFIX,
+                ZFS_MOUNT,
                 request.user(),
                 request.namespace(),
                 request.name()
@@ -20,7 +20,7 @@ public class PagePathResolver {
 
     public Path writeRequestToFilePath(final WritePageRequest request) {
         return Paths.get(
-                PATH_PREFIX,
+                ZFS_MOUNT,
                 request.user(),
                 request.namespace(),
                 request.name()
